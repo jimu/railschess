@@ -5,29 +5,40 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+#
+ActiveRecord::Base.connection.execute('delete from sqlite_sequence where name="users"')
+ActiveRecord::Base.connection.execute('delete from sqlite_sequence where name="games"')
+ActiveRecord::Base.connection.execute('delete from sqlite_sequence where name="players"')
+ActiveRecord::Base.connection.execute('delete from sqlite_sequence where name="pieces"')
+ActiveRecord::Base.connection.execute('delete from sqlite_sequence where name="moves"')
 
-jimu  = User.create name: 'Jim',   email: 'jimu@jimu.net'
-steve = User.create name: 'Steve', email: 'steve@jimu.net'
+
+jimu  = User.create name: 'Jim',   email: 'jimu@jimu.net', password:'goblin', password_confirmation:'goblin'
+steve = User.create name: 'Steve', email: 'steve@jimu.net', password:'goblin', password_confirmation:'goblin'
 
 User.create([
-  {name: 'Mark',  email: 'markr@markr.net'},
-  {name: 'Kirk',  email: 'kirkb@kirkb.net'},
+  {name: 'Mark',  email: 'markr@markr.net', password:'goblin', password_confirmation:'goblin'},
+  {name: 'Kirk',  email: 'kirkb@kirkb.net', password:'goblin', password_confirmation:'goblin'},
 ])
 
 Game.create([
-  {name: 'G001'},
-  {name: 'G002'},
+  {name: 'G001', status: Game::STATUS_PLAY},
+  {name: 'G002', status: Game::STATUS_OPEN},
 ])
 
 g001 = Game.first
 
 
 Player.create([
-  {user: jimu,  game: g001, color:'W'},
-  {user: steve, game: g001, color:'B'},
-  {user_id: 2, game_id: 2, color:'W'},
-  {user_id: 3, game_id: 2, color:'B'},
+  {user: jimu,  game: g001, color:'W', status: Player::STATUS_READY },
+  {user: steve, game: g001, color:'B', status: Player::STATUS_DONE },
+  {user_id: 2, game_id: 2, color:'W',  status: Player::STATUS_READY },
+  {user_id: 3, game_id: 2, color:'B',  status: Player::STATUS_DONE },
 ])
+
+p1 = Player.first
+p2 = Player.second
 
 Piece.create([
   {name: 'R', position: 'a1', game: g001, player_id: 1},
