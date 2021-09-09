@@ -17,7 +17,7 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create player" do
     assert_difference('Player.count') do
-      post players_url, params: { player: { color: @player.color, game_id: @player.game_id, user_id: @player.user_id } }
+      post players_url, params: { player: { color: @player.color, game_id: @player.game_id, user_id: @player.user_id, status: @player.status } }
     end
 
     assert_redirected_to player_url(Player.last)

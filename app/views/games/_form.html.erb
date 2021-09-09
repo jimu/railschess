@@ -16,6 +16,14 @@
     <%= form.text_field :name %>
   </div>
 
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, 
+      (1..Game::STATUS_MAX).collect {|i| [Game::STATUS_DESCRIPTION[i], i] },
+      { include_blank: "Select game status..." }
+      %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

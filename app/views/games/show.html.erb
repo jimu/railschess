@@ -1,24 +1,30 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Game</h2>
 <p>
   <strong>Name:</strong>
   <%= @game.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= Game::STATUS_DESCRIPTION[@game.status] %>
 </p>
 
 
 <h3>Players</h3>
 <ul>
   <% @game.players.each do |p| %>
-    <li><%= link_to p.user.name, p.user %> (<%= p.color %>)
+    <li><%= link_to p.user.name, p.user %> (<%= link_to p.color, p %>)
   <% end %>
 
 </ul>
 <h3>Board</h3>
-<pre><%= @board %></pre>
+<%= raw @board %>
 <h3>Moves</h3>
 <ul>
   <% @game.moves.order(:turn).each do |move| %>
-    <li><%= move.turn %>: <%= move.player.color %>: <%= move.orders %>
+    <li><%= link_to move.turn, move %>: <%= move.player.color %>: <%= move.orders %>
   <% end %>
 </ul>
 

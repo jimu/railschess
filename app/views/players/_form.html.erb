@@ -18,17 +18,22 @@
 
   <div class="field">
     <%= form.label :game_id %>
-    <%= form.text_field :game_id %>
+    <%= select_tag "player[game_id]", options_from_collection_for_select(Game.all, 'id', 'name', @player.game_id) %>
   </div>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= select_tag "player[user_id]", options_from_collection_for_select(User.all, 'id', 'name', @player.user_id) %>
+<!--
+    <%= form.select :user_id, User.all.collect { |u| [u.name, u.id] },
+        include_blank: "Pick a user...",
+        selected: params[:user_id] %>
+-->
   </div>
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :status, [['Choose status', Player::STATUS_ERROR], ['Ready', Player::STATUS_READY], ['Done', Player::STATUS_DONE]] %>
   </div>
 
   <div class="actions">

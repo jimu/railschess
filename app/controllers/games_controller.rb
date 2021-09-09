@@ -38,6 +38,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1 or /games/1.json
   def update
     respond_to do |format|
+    puts game_params
       if @game.update(game_params)
         format.html { redirect_to @game, notice: "Game was successfully updated." }
         format.json { render :show, status: :ok, location: @game }
@@ -65,7 +66,7 @@ class GamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:name)
+      params.require(:game).permit(:name, :status)
     end
 
     @@PIECE_MAP = {
@@ -96,18 +97,26 @@ class GamesController < ApplicationController
       squares = Array.new(64)
 
       @game.pieces.each do |p|
-        squares[position_to_ix(p.position)] = piece_symbol0(p)
+        squares[position_to_ix(p.position)] = piece_symbol(p)
       end
+
+      apply_turns squares
 
       board = '='*16 + "\n"
+      html_board = "<table class=chess>"
 
       (7..0).step(-1).each do |r|
+        html_board += "<tr>"
         for c in 0..7 do
           board += ' ' + (squares[r*8+c] || '.')
+          html_board += "<td>#{squares[r*8+c]}</td>"
         end
         board += "\n"
+        html_board += "</tr>\n"
       end
       board += '='*16 + "\n"
+      html_board += "</table>\n"
+
     end
 
     def position_to_ix(position)
@@ -128,5 +137,16 @@ class GamesController < ApplicationController
 
     def col(position)
       position[0] - 'a'
+    end
+
+
+    def apply_turns(squares)
+      @game.moves.order(:turn).each do |move|
+        start = position_to_ix(move.orders[0..1])
+        dest  = position_to_ix(move.orders[3..4])
+
+        squares[dest] = squares[start]
+        squares[start] = nil
+      end
     end
 end

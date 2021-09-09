@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  color: MyString
+  color: B
   game: one
   user: one
+  status: 1
 
 two:
-  color: MyString
+  color: W
   game: two
   user: two
+  status: 1
