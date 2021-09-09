@@ -39,7 +39,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy user" do
-    ActiveRecord::Base.verbose_query_logs = true
     assert_difference('User.count', -1) do
       delete user_url(@user)
     end
