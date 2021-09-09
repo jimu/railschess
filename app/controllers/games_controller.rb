@@ -102,19 +102,19 @@ class GamesController < ApplicationController
 
       apply_turns squares
 
-      board = '='*16 + "\n"
+      # board = '='*16 + "\n"
       html_board = "<table class=chess>"
 
       (7..0).step(-1).each do |r|
         html_board += "<tr>"
         for c in 0..7 do
-          board += ' ' + (squares[r*8+c] || '.')
+          # board += ' ' + (squares[r*8+c] || '.')
           html_board += "<td>#{squares[r*8+c]}</td>"
         end
-        board += "\n"
+        # board += "\n"
         html_board += "</tr>\n"
       end
-      board += '='*16 + "\n"
+      # board += '='*16 + "\n"
       html_board += "</table>\n"
 
     end
