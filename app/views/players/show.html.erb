@@ -2,17 +2,17 @@
 
 <p>
   <strong>Color:</strong>
-  <%= @player.color %>
+  <%= link_to @player.user.name, @player.user %> (<%= @player.color %>)
 </p>
 
 <p>
   <strong>Game:</strong>
-  <%= @player.game_id %>
+  <%= link_to @player.game.name, @player.game %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @player.user_id %>
+  <strong>Status:</strong>
+  <%= @status %>
 </p>
 
 <%= link_to 'Edit', edit_player_path(@player) %> |

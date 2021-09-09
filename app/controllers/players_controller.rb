@@ -8,6 +8,7 @@ class PlayersController < ApplicationController
 
   # GET /players/1 or /players/1.json
   def show
+    @status = @player.status == Player::STATUS_DONE ? "Done" : "Ready"
   end
 
   # GET /players/new
@@ -64,6 +65,6 @@ class PlayersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def player_params
-      params.require(:player).permit(:color, :game_id, :user_id)
+      params.require(:player).permit(:color, :game_id, :user_id, :status)
     end
 end

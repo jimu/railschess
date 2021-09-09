@@ -6,11 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-jimu = User.create name: 'Jim',   email: 'jimu@jimu.net'
+jimu  = User.create name: 'Jim',   email: 'jimu@jimu.net'
+steve = User.create name: 'Steve', email: 'steve@jimu.net'
 
 User.create([
- #{name: 'Jim',   email: 'jimu@jimu.net'},
-  {name: 'Steve', email: 'steve@steve.net'},
   {name: 'Mark',  email: 'markr@markr.net'},
   {name: 'Kirk',  email: 'kirkb@kirkb.net'},
 ])
@@ -24,8 +23,8 @@ g001 = Game.first
 
 
 Player.create([
-  {user: jimu, game: g001, color:'W'},
-  {user_id: 2, game_id: 1, color:'B'},
+  {user: jimu,  game: g001, color:'W'},
+  {user: steve, game: g001, color:'B'},
   {user_id: 2, game_id: 2, color:'W'},
   {user_id: 3, game_id: 2, color:'B'},
 ])
@@ -63,4 +62,10 @@ Piece.create([
   {name: 'P', position: 'f7', game: g001, player_id: 2},
   {name: 'P', position: 'g7', game: g001, player_id: 2},
   {name: 'P', position: 'h7', game: g001, player_id: 2},
+])
+
+
+Move.create([
+  {turn: 1, orders: "b2-b4", game: g001, player_id: 1},
+  {turn: 2, orders: "b7-b5", game: g001, player_id: 2},
 ])

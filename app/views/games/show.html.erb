@@ -6,13 +6,20 @@
 </p>
 
 
-<h3>Players<h3>
+<h3>Players</h3>
 <ul>
   <% @game.players.each do |p| %>
     <li><%= link_to p.user.name, p.user %> (<%= p.color %>)
   <% end %>
 
-  <pre><%= @board %></pre>
+</ul>
+<h3>Board</h3>
+<pre><%= @board %></pre>
+<h3>Moves</h3>
+<ul>
+  <% @game.moves.order(:turn).each do |move| %>
+    <li><%= move.turn %>: <%= move.player.color %>: <%= move.orders %>
+  <% end %>
 </ul>
 
 

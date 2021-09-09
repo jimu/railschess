@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  turn: 1
+  orders: MyText
+  game: one
+  player: one
+
+two:
+  turn: 1
+  orders: MyText
+  game: two
+  player: two

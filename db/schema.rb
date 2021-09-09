@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_081048) do
+ActiveRecord::Schema.define(version: 2021_09_08_235408) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "moves", force: :cascade do |t|
+    t.integer "turn"
+    t.text "orders"
+    t.integer "game_id", null: false
+    t.integer "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_moves_on_game_id"
+    t.index ["player_id"], name: "index_moves_on_player_id"
   end
 
   create_table "pieces", force: :cascade do |t|
@@ -35,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_081048) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status"
     t.index ["game_id"], name: "index_players_on_game_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
@@ -46,6 +58,8 @@ ActiveRecord::Schema.define(version: 2021_09_08_081048) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "moves", "games"
+  add_foreign_key "moves", "players"
   add_foreign_key "pieces", "games"
   add_foreign_key "pieces", "players"
   add_foreign_key "players", "games"
