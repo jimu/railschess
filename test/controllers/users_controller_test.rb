@@ -3,6 +3,7 @@ require "test_helper"
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
+    @newuser = User.new name: "New User", email: "t@t.com"
   end
 
   test "should get index" do
@@ -17,10 +18,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: { user: { email: @user.email, name: @user.name } }
+      post users_url, params: { user: { email: @newuser.email, name: @newuser.name } }
     end
 
     assert_redirected_to user_url(User.last)
+  end
+
+  test "should not create user with existing name" do
+    assert_difference('User.count', 0) do
+      post users_url, params: { user: { email: @user.email, name: @user.name } }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
+  test "should not create user with no name" do
+    assert_difference('User.count', 0) do
+      post users_url, params: { user: { email: @user.email, name: " " } }
+      post users_url, params: { user: { email: @user.email} }
+    end
+
+    assert_response :unprocessable_entity
   end
 
   test "should show user" do
