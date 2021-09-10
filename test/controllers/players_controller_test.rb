@@ -3,6 +3,7 @@ require "test_helper"
 class PlayersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @player = players(:one)
+    login
   end
 
   test "should get index" do

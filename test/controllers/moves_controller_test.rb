@@ -3,6 +3,7 @@ require "test_helper"
 class MovesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @move = moves(:one)
+    login
   end
 
   test "should get index" do

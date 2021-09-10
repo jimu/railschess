@@ -4,6 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
     @newuser = User.new name: "New User", email: "t@t.com", password: "Password1"
+    login
   end
 
   test "should get index" do
@@ -21,7 +22,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       post users_url, params: { user: { email: @newuser.email, name: @newuser.name, password: @newuser.password, password_confirmation: @newuser.password } }
     end
 
-    assert_redirected_to user_url(User.last)
+    assert_redirected_to users_path # user_url(User.last)
   end
 
   test "should not create user with existing name" do
