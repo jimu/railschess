@@ -11,10 +11,16 @@ class Player < ApplicationRecord
 
   validates :status, inclusion: { in: [STATUS_READY, STATUS_DONE], message: 'not selected' }
 
+  STATUS_TEXT = %w{ INVALID Ready Done }
+
   def status_text
-    status == Player::STATUS_DONE ? "Done" :
-    status == Player::STATUS_READY ? "Ready" :
-    "Error(#{status})"
+    return STATUS_TEXT[status]
   end
+
+#  def status_text
+#    status == Player::STATUS_DONE ? "Done" :
+#    status == Player::STATUS_READY ? "Ready" :
+#    "Error(#{status})"
+#  end
 
 end

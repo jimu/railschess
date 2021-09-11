@@ -3,3 +3,32 @@
 The time is <%= Time.now %>
 
 <p>Hello, <%= @user.name %>
+
+<h3>Your move</h3>
+<ul>
+<% @play_games.each do |g| %>
+  <li><%= link_to g.name, g %>
+<% end %>
+</ul>
+
+<h3>Waiting for opponent</h3>
+<ul>
+<% @done_games.each do |g| %>
+  <li><%= link_to g.name, g %>
+<% end %>
+</ul>
+
+<h3>Finished Games</h3>
+<ul>
+<% @finished_games.each do |g| %>
+  <li><%= link_to g.name, g %>
+<% end %>
+</ul>
+
+<h3>Archived Games</h3>
+<ul>
+<% @archived_games.each do |g| %>
+  <li><%= link_to g.name, g %>
+<% end %>
+</ul>
+<!--%= link_to "Archived games", "#" %-->
