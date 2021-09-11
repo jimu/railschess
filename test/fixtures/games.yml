@@ -7,3 +7,11 @@ one:
 two:
   name: MyString 2
   status: 4
+
+gamex:
+  name: Dave ready to play
+  status: <%= Game::STATUS_PLAY %>
+
+gamey:
+  name: Dave not ready to play
+  status: <%= Game::STATUS_PLAY %>

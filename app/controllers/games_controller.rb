@@ -9,6 +9,10 @@ class GamesController < ApplicationController
   # GET /games/1 or /games/1.json
   def show
     @board = make_board
+    user_id = session['user_id']
+    @user = User.find(user_id)
+
+    @is_active_player = @game.players.any? {|p| p.user_id == user_id && p.status == Player::STATUS_READY}
   end
 
   # GET /games/new

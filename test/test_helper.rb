@@ -26,8 +26,8 @@ module AuthenticationHelpers
     end
   end
 
-  def login
-    login_as users(:one)
+  def login user_ref = :one
+    login_as users(user_ref)
   end
 
   def logout

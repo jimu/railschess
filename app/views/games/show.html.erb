@@ -28,6 +28,15 @@
   <% end %>
 </ul>
 
+<% if @is_active_player then %>
+  <%= form_with do |form| %>
+    <%= form.label :move, "Move:" %>
+    <%= form.text_field :move %>
+    <%= form.submit "Submit Move" %>
+  <% end %>
+<% end %>
+
+
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

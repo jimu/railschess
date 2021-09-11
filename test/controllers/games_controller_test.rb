@@ -46,4 +46,15 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to games_url
   end
+
+  test "should have Submit Move link when READY player visits game page" do
+    get game_path games(:gamex)
+    assert_select "input[value='Submit Move']"
+  end
+
+  test "should NOT have Submit Move link when NOT READY player visits game page" do
+    get game_path games(:gamey)
+    assert_select "input[value='Submit Move']", {count: 0}
+  end
+
 end

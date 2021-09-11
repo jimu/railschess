@@ -11,3 +11,15 @@ two:
   game: two
   user: two
   status: 1
+
+dave_ready_to_play_gamex:
+  color: W
+  game: gamex
+  user: one
+  status: <%= Player::STATUS_READY %>
+
+dave_not_ready_to_play_gamey:
+  color: B
+  game: gamey
+  user: one
+  status: <%= Player::STATUS_DONE %>
