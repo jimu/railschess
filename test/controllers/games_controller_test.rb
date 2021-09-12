@@ -57,4 +57,26 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[value='Submit Move']", {count: 0}
   end
 
+  test "Closed game should have 1 DONE and 1 INVITE player" do
+    # LESSON - This is not a controller test!
+    gamei = games(:gamei)
+    num_done_players   = gamei.players.count {|p| p.status == Player::STATUS_DONE}
+    num_invite_players = gamei.players.count {|p| p.status == Player::STATUS_INVITE}
+
+    assert num_done_players == 1
+    assert num_invite_players == 1
+  end
+
+  test "Creating a closed game should have 1 DONE and 1 INVITE player" do
+    # how do I simulate "creating" a game? What am I testing?
+    #   * edit form?
+    #   * create action?
+    badgame_params = {game: {name: 'badgame', status: Game::STATUS_CLOSED}}
+    post games_path, params: badgame_params
+    post games_url,  params: { game: { name: @game.name, status: @game.status } }
+    assert_response :not_acceptable
+    # assert_redirected_to game_url(Game.last)
+
+  end
+
 end

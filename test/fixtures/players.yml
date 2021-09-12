@@ -23,3 +23,15 @@ dave_not_ready_to_play_gamey:
   game: gamey
   user: one
   status: <%= Player::STATUS_DONE %>
+
+dave_invitation_to_gamei:
+  color: nil
+  game: gamei
+  user: one
+  status: <%= Player::STATUS_INVITE %>
+
+gamei_owner:
+  color: nil
+  game: gamei
+  user: two
+  status: <%= Player::STATUS_DONE %>

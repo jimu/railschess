@@ -15,3 +15,7 @@ gamex:
 gamey:
   name: Dave not ready to play
   status: <%= Game::STATUS_PLAY %>
+
+gamei:
+  name: Daves game
+  status: <%= Game::STATUS_CLOSED %>
