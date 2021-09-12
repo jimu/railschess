@@ -13,12 +13,12 @@
 
 <p>
   <strong>Game:</strong>
-  <%= @move.game_id %>
+  <%= link_to @move.game.name, @move.game %>
 </p>
 
 <p>
   <strong>Player:</strong>
-  <%= @move.player_id %>
+  <%= link_to @move.player.user.name, @move.player.user %> (<%= link_to @move.player.color, @move.player %>)
 </p>
 
 <%= link_to 'Edit', edit_move_path(@move) %> |

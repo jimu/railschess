@@ -11,8 +11,10 @@ class GamesController < ApplicationController
     @board = make_board
     user_id = session['user_id']
     @user = User.find(user_id)
+    @num_moves = @game.moves.count
 
     @is_active_player = @game.players.any? {|p| p.user_id == user_id && p.status == Player::STATUS_READY}
+    @player_id = @game.players.find {|p| p.user_id == user_id}&.id
   end
 
   # GET /games/new

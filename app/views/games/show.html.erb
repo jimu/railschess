@@ -29,11 +29,49 @@
 </ul>
 
 <% if @is_active_player then %>
-  <%= form_with do |form| %>
-    <%= form.label :move, "Move:" %>
-    <%= form.text_field :move %>
+  <%= form_with url: moves_path, method: :post do |form| %>
+
+    <%= form.hidden_field "move[turn]", value: @num_moves + 1 %>
+    <%= form.hidden_field "move[game_id]", value: @game.id %>
+    <%= form.hidden_field "move[player_id]", value: 1 %>
+
+    <%= form.label "move[orders]", "Move:" %>
+    <%= form.text_field "move[orders]" %>
+
     <%= form.submit "Submit Move" %>
+
   <% end %>
+
+  <% move = Move.new %>
+  <%= form_with(model: move) do |form| %>
+    <!-- I don't expect any of this to work. form is directed to new move. -->
+    <% if move.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(move.errors.count, "error") %> prohibited this move from being saved:</h2>
+
+        <ul>
+          <% move.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form.hidden_field :turn, value: @num_moves + 1 %>
+    <%= form.hidden_field :game_id, value: @game.id %>
+    <%= form.hidden_field :player_id, value: 1 %>
+
+ (alternate method)
+    <div class="field">
+      <%= form.label :orders %>
+      <%= form.text_area :orders %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+
 <% end %>
 
 

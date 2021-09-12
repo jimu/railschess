@@ -17,10 +17,4 @@ class Player < ApplicationRecord
     return STATUS_TEXT[status]
   end
 
-#  def status_text
-#    status == Player::STATUS_DONE ? "Done" :
-#    status == Player::STATUS_READY ? "Ready" :
-#    "Error(#{status})"
-#  end
-
 end
