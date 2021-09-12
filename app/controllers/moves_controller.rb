@@ -27,6 +27,15 @@ class MovesController < ApplicationController
       if @move.save
         format.html { redirect_to @move, notice: "Move was successfully created." }
         format.json { render :show, status: :created, location: @move }
+
+        # update player states
+        @move.game.players.each do |p|
+          p.status = (p.id == @move.player_id) ? 
+            Player::STATUS_DONE :
+            Player::STATUS_READY
+          p.save
+        end
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @move.errors, status: :unprocessable_entity }
