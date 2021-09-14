@@ -60,6 +60,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   test "Closed game should have 1 DONE and 1 INVITE player" do
     # LESSON - This is not a controller test!
     gamei = games(:gamei)
+
     num_done_players   = gamei.players.count {|p| p.status == Player::STATUS_DONE}
     num_invite_players = gamei.players.count {|p| p.status == Player::STATUS_INVITE}
 
@@ -67,16 +68,33 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert num_invite_players == 1
   end
 
-  test "Creating a closed game should have 1 DONE and 1 INVITE player" do
-    # how do I simulate "creating" a game? What am I testing?
-    #   * edit form?
-    #   * create action?
-    badgame_params = {game: {name: 'badgame', status: Game::STATUS_CLOSED}}
-    post games_path, params: badgame_params
-    post games_url,  params: { game: { name: @game.name, status: @game.status } }
-    assert_response :not_acceptable
-    # assert_redirected_to game_url(Game.last)
+  test "Creating a closed game should include 1 WHITE DONE and 1 BLACK INVITE player" do
 
+    goodgame_params = {game: {
+      name: 'goodgame',
+      status: Game::STATUS_CLOSED,
+      player_attributes: [
+        { status: Player::STATUS_READY, color: 'W', user_id: 1},
+        { status: Player::STATUS_DONE,  color: 'B', user_id: 2},
+      ]
+    }}
+    post games_path, params: goodgame_params
+
+    assert_redirected_to game_url Game.last
+  end
+
+  test "Creating a closed game with only 1 player should return unprocessable_entity" do
+
+    badgame_params = {game: {
+      name: 'badgame',
+      status: Game::STATUS_CLOSED,
+      player_attributes: [
+        { status: Player::STATUS_READY, color: 'W', user_id: 1},
+      ]
+    }}
+    post games_path, params: badgame_params
+
+    assert_response :unprocessable_entity
   end
 
 end

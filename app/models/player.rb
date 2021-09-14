@@ -18,4 +18,7 @@ class Player < ApplicationRecord
     return STATUS_TEXT[status]
   end
 
+  def self.status_text(status)
+    return STATUS_TEXT[status]
+  end
 end
