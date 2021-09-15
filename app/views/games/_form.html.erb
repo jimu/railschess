@@ -34,7 +34,10 @@
       <%= form_player.collection_select :user_id, User.all, :id, :name %>
 
       <%= form_player.label :status %>
-      <%= form_player.text_field :status %>
+      <%= form_player.select :status,
+        (1..Game::STATUS_MAX).collect {|i| [Game::STATUS_DESCRIPTION[i], i] },
+        { include_blank: "Select game status..." }
+      %>
     </div>
   <% end %>
 
