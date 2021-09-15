@@ -7,19 +7,16 @@
     <%= csp_meta_tag %>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %-->
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <h1>RailsChess</h1>
-  <%= link_to "Games", games_url %>
-  <%= link_to "Users", users_url %>
-  <%= link_to "Players", players_url %>
-  <%= link_to "Moves", moves_url %>
-  <%= link_to "Pieces", pieces_url %>
+  <%= render "menu" %>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
