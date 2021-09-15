@@ -36,9 +36,7 @@
       <%= form_player.text_field :color %>
 
       <%= form_player.label :user_id %>
-      <%= form_player.text_field :user_id %>
-      <!--%= select_tag "user_id", options_from_collection_for_select(User.all, 'id', 'name', :user_id) %-->
-      <!--%= select_tag :form_player, options_from_collection_for_select(User.all, 'id', 'name', @player.user_id) %-->
+      <%= form_player.collection_select :user_id, User.all, :id, :name %>
 
       <%= form_player.label :status %>
       <%= form_player.text_field :status %>
