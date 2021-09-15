@@ -32,7 +32,9 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     
+    puts "PARAMS"
     p params
+    puts "GAME_PARAMS"
     p game_params
 
     user_id = session['user_id']
@@ -78,7 +80,10 @@ class GamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:name, :status, :players)
+      # params.require(:game).permit(:name, :status, :players)
+      params.require(:game).permit(:name, :status,
+        players_attributes: [:id, :turn, :player_id, :user_id, :color, :status]
+      )
     end
 
     @@PIECE_MAP = {

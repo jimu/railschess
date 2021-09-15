@@ -15,7 +15,7 @@ class Game < ApplicationRecord
 
   # validations
   validates_inclusion_of :status, :in => 1..STATUS_MAX
-  #validate :has_valid_players, if: Proc.new {status == Game::STATUS_CLOSED}
+  # validate :has_valid_players, if: Proc.new {status == Game::STATUS_CLOSED}
   accepts_nested_attributes_for :players
   validates_associated :players
 
@@ -27,6 +27,7 @@ class Game < ApplicationRecord
   end
 
   def has_valid_players
+    puts "players.count=#{players.count}"
     if players.count != 2 then
       errors.add :players, :too_plain,
          message: "must include White and Black (has #{players.count} players)"

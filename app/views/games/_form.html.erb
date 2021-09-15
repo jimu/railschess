@@ -11,6 +11,11 @@
     </div>
   <% end %>
 
+  <h3>Params</h3>
+  <% debug game %>
+  <% p game %>
+
+  <h3>Game</h3>
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -23,6 +28,25 @@
       { include_blank: "Select game status..." }
       %>
   </div>
+
+  <%= form.fields_for :players do |form_player| %>
+    <div>
+      <h3>Player</h3>
+      <%= form_player.label :color %>
+      <%= form_player.text_field :color %>
+
+      <%= form_player.label :user_id %>
+      <%= form_player.text_field :user_id %>
+      <!--%= select_tag "user_id", options_from_collection_for_select(User.all, 'id', 'name', :user_id) %-->
+      <!--%= select_tag :form_player, options_from_collection_for_select(User.all, 'id', 'name', @player.user_id) %-->
+
+      <%= form_player.label :status %>
+      <%= form_player.text_field :status %>
+  </div>
+    </div>
+  <% end %>
+
+
 
   <div class="actions">
     <%= form.submit %>
