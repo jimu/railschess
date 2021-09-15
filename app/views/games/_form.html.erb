@@ -11,22 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="container">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, 
-      (1..Game::STATUS_MAX).collect {|i| [Game::STATUS_DESCRIPTION[i], i] },
-      { include_blank: "Select game status..." }
-      %>
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, 
+        (1..Game::STATUS_MAX).collect {|i| [Game::STATUS_DESCRIPTION[i], i] },
+        { include_blank: "Select game status..." }
+        %>
+    </div>
   </div>
 
   <%= form.fields_for :players do |form_player| %>
-    <div>
-      <h3>Player</h3>
+    <h3>Player</h3>
+    <p>
+    <div class="container">
       <%= form_player.label :color %>
       <%= form_player.text_field :color %>
 
@@ -35,15 +38,18 @@
 
       <%= form_player.label :status %>
       <%= form_player.select :status,
-        (1..Game::STATUS_MAX).collect {|i| [Game::STATUS_DESCRIPTION[i], i] },
+        (1...Player::STATUS_TEXT.size).collect {|i| [Player::STATUS_TEXT[i], i] },
         { include_blank: "Select game status..." }
       %>
     </div>
+    </p>
   <% end %>
 
 
 
   <div class="actions">
-    <%= form.submit %>
+    <p>
+      <%= form.submit %>
+    </p>
   </div>
 <% end %>
