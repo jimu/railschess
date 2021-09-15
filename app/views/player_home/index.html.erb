@@ -4,31 +4,57 @@ The time is <%= Time.now %>
 
 <p>Hello, <%= @user.name %>
 
+<h1>Games</h1>
 <h3>Your move</h3>
-<ul>
-<% @play_games.each do |g| %>
-  <li><%= link_to g.name, g %>
+<% if @play_games.count > 0 %>
+  <ul>
+  <% @play_games.each do |g| %>
+    <li><%= link_to g.name, g %>
+  <% end %>
+  </ul>
+<% else %>
+  <div class="container">
+    <p>None</p>
+  </div>
 <% end %>
-</ul>
 
 <h3>Waiting for opponent</h3>
-<ul>
-<% @done_games.each do |g| %>
-  <li><%= link_to g.name, g %>
+<% if @done_games.count > 0 %>
+  <ul>
+  <% @done_games.each do |g| %>
+    <li><%= link_to g.name, g %>
+  <% end %>
+  </ul>
+<% else %>
+  <div class="container">
+    <p>None</p>
+  </div>
 <% end %>
-</ul>
 
 <h3>Finished Games</h3>
-<ul>
-<% @finished_games.each do |g| %>
-  <li><%= link_to g.name, g %>
+<% if @finished_games.count > 0 %>
+  <ul>
+  <% @finished_games.each do |g| %>
+    <li><%= link_to g.name, g %>
+  <% end %>
+  </ul>
+<% else %>
+  <div class="container">
+    <p>None</p>
+  </div>
 <% end %>
-</ul>
 
 <h3>Archived Games</h3>
-<ul>
-<% @archived_games.each do |g| %>
-  <li><%= link_to g.name, g %>
+<% if @archived_games.count > 0 %>
+  <ul>
+  <% @archived_games.each do |g| %>
+    <li><%= link_to g.name, g %>
+  <% end %>
+  </ul>
+<% else %>
+  <div class="container">
+    <p>None</p>
+  </div>
 <% end %>
-</ul>
+
 <!--%= link_to "Archived games", "#" %-->
