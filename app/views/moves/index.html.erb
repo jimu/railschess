@@ -2,21 +2,21 @@
 
 <h1>Moves</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Turn</th>
-      <th>Orders</th>
-      <th>Game</th>
-      <th>Player</th>
-      <th colspan="3"></th>
+      <th scope="col">Turn</th>
+      <th scope="col">Orders</th>
+      <th scope="col">Game</th>
+      <th scope="col">Player</th>
+      <th scope="col" colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @moves.each do |move| %>
       <tr>
-        <td><%= move.turn %></td>
+        <td scope="row"><%= move.turn %></td>
         <td><%= move.orders %></td>
         <td><%= link_to move.game.name, move.game %></td>
         <td><%= link_to move.player.user.name, move.player %></td>
